@@ -1,15 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
 :root {
-  --primary: #ff5722;
-  --primary-hover: #e64a19;
-  --secondary: #2e384d;
-  --bg-color: #f4f7f9;
-  --card-bg: #ffffff;
-  --border-color: #e0e6ed;
-  --text-main: #334155;
-  --focus-ring: rgba(255, 87, 34, 0.25);
-  --shadow-md: 0 10px 25px -5px rgba(0, 0, 0, 0.06), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+  /* Nueva Paleta YOWM 2026: Naranja Terracota + Azul Grafito */
+  --primary: #E66A42;          /* Naranja Terracota (Comida/Apetito) */
+  --primary-hover: #D05630;
+  --secondary: #3A4750;        /* Azul Grafito (Confianza/Logística) */
+  --bg-color: #F8FAF9;         /* Fondo suave y limpio */
+  --card-bg: #FFFFFF;
+  --border-color: #E2E8F0;
+  --text-main: #2D3748;
+  --focus-ring: rgba(230, 106, 66, 0.25);
+  --shadow-md: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.03);
   --radius: 12px;
   --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -24,17 +25,54 @@ body {
   font-family: 'Inter', -apple-system, sans-serif;
   background-color: var(--bg-color);
   color: var(--text-main);
-  padding: 40px 20px;
+  padding: 20px 16px 40px 16px;
 }
 
-/* Layout vertical en 1 sola columna */
+/* ==========================================================================
+   ESTILOS RESPONSIVOS DEL LOGO (Mobile-First)
+   ========================================================================== */
+.header-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 0 25px 0;
+  width: 100%;
+}
+
+.logo-wrapper {
+  max-width: 280px; /* Tamaño optimizado para pantallas de celular */
+  width: 80%;
+  text-align: center;
+}
+
+.img-logo {
+  width: 100%;
+  height: auto; /* Mantiene la proporción automáticamente */
+  object-fit: contain;
+  filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.04));
+}
+
+/* Ajustes para pantallas más grandes (Tablets y Computadoras) */
+@media (min-width: 768px) {
+  .logo-wrapper {
+    max-width: 360px; /* Tamaño un poco mayor para desktop */
+  }
+  
+  .header-logo {
+    padding: 20px 0 35px 0;
+  }
+}
+
+/* Layout Contenedor en Una Sola Columna */
 .container {
   max-width: 650px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 25px;
 }
+
+/* (Sigue el resto de tus estilos de .card, inputs y botones) */
 
 .card {
   background: var(--card-bg);
