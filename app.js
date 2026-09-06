@@ -66,21 +66,69 @@ async function obtenerCoordenadasDeDireccion(prefix) {
 }
 
 // Agregar items al menú
-function agregarProducto() {
-  const nombre = document.getElementById('prod-nombre').value;
-  const precio = parseFloat(document.getElementById('prod-precio').value);
+const LIMITE_PRODUCTOS = 5;
 
-  if (!nombre || isNaN(precio)) {
-    alert("Ingresa un nombre y precio válido");
+// Agrega un nuevo par de campos (Nombre y Precio) hasta un máximo de 5
+function agregarCampoProducto() {
+  const contenedor = document.getElementById('contenedor-productos-dinamicos');
+  const cantidadActual = contenedor.getElementsByClassName('fila-producto').length;
+
+  if (cantidadActual < LIMITE_PRODUCTOS) {
+    const nuevaFila = document.createElement('div');
+    nuevaFila.className = 'fila-producto';
+    nuevaFila.innerHTML = `
+      <input type="text" class="input-prod-nombre" placeholder="Nombre del platillo">
+      <input type="number" class="input-prod-precio" placeholder="Precio ($MXN)" step="0.5">
+    `;
+    contenedor.appendChild(nuevaFila);
+
+    // Si ya llegamos al límite de 5, deshabilitamos el botón
+    if (cantidadActual + 1 === LIMITE_PRODUCTOS) {
+      const btnAgregar = document.getElementById('btn-agregar-mas');
+      btnAgregar.disabled = true;
+      btnAgregar.innerText = "Límite alcanzado (5 máx.)";
+    }
+  }
+}
+
+// Lee todos los campos de productos llenos y los guarda en el menú del negocio
+function guardarProductosMenu() {
+  const nombres = document.getElementsByClassName('input-prod-nombre');
+  const precios = document.getElementsByClassName('input-prod-precio');
+  
+  let productosAgregados = 0;
+
+  for (let i = 0; i < nombres.length; i++) {
+    const nombreVal = nombres[i].value.trim();
+    const precioVal = parseFloat(precios[i].value);
+
+    if (nombreVal !== '' && !isNaN(precioVal) && precioVal > 0) {
+      const id = Date.now() + i;
+      negocio.menu.push({ id, nombre: nombreVal, precio: precioVal });
+      productosAgregados++;
+    }
+  }
+
+  if (productosAgregados === 0) {
+    alert("Ingresa al menos un nombre y un precio válido para agregar al menú.");
     return;
   }
 
-  const id = Date.now();
-  negocio.menu.push({ id, nombre, precio });
-  
-  document.getElementById('prod-nombre').value = '';
-  document.getElementById('prod-precio').value = '';
+  // Reiniciar formulario a 1 sola fila vacía
+  const contenedor = document.getElementById('contenedor-productos-dinamicos');
+  contenedor.innerHTML = `
+    <div class="fila-producto">
+      <input type="text" class="input-prod-nombre" placeholder="Nombre del platillo">
+      <input type="number" class="input-prod-precio" placeholder="Precio ($MXN)" step="0.5">
+    </div>
+  `;
 
+  // Habilitar de nuevo el botón "Agregar más productos"
+  const btnAgregar = document.getElementById('btn-agregar-mas');
+  btnAgregar.disabled = false;
+  btnAgregar.innerText = "➕ Agregar más productos";
+
+  // Actualizar la lista en la vista del cliente
   renderizarMenu();
 }
 

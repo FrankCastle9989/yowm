@@ -180,3 +180,30 @@ button {
   background-color: #1ebd56;
   box-shadow: 0 4px 12px rgba(37, 211, 102, 0.35);
 }
+
+/* Estilos para los campos dinámicos de productos */
+.fila-producto {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.fila-producto input {
+  margin-bottom: 0;
+}
+
+.acciones-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+/* Estado deshabilitado cuando se llega al límite de 5 */
+button:disabled {
+  background-color: #e2e8f0 !important;
+  color: #a0aec0 !important;
+  cursor: not-allowed;
+  border-color: #cbd5e1 !important;
+  box-shadow: none !important;
+}

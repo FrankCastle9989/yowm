@@ -26,10 +26,25 @@
         </div>
         <button type="button" class="btn-secundario" onclick="obtenerUbicacionNegocio()">Usar mi dirección actual</button>
 
-        <h3>Agregar Producto al Menú</h3>
-        <input type="text" id="prod-nombre" placeholder="Nombre del platillo">
-        <input type="number" id="prod-precio" placeholder="Precio ($MXN)" step="0.5">
-        <button type="button" onclick="agregarProducto()">Agregar al Menú</button>
+        
+        <!-- SECCIÓN DE AGREGAR PRODUCTOS EN EL NEGOCIO -->
+        <h3>Agregar Productos al Menú (Máx. 5)</h3>
+        <div id="contenedor-productos-dinamicos">
+          <!-- El primer platillo aparece por defecto -->
+          <div class="fila-producto">
+            <input type="text" class="input-prod-nombre" placeholder="Nombre del platillo">
+            <input type="number" class="input-prod-precio" placeholder="Precio ($MXN)" step="0.5">
+          </div>
+        </div>
+
+        <div class="acciones-menu">
+          <button type="button" id="btn-agregar-mas" class="btn-secundario" onclick="agregarCampoProducto()">
+            ➕ Agregar más productos
+          </button>
+          <button type="button" class="btn-principal" onclick="guardarProductosMenu()">
+            Guardar en el Menú
+          </button>
+        </div>
       </form>
     </section>
 
