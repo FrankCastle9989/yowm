@@ -9,18 +9,22 @@
 <body>
 
   <div class="container">
+    <!-- PANEL DEL NEGOCIO -->
     <section class="card">
       <h2>1. Configuración del Negocio</h2>
       <form id="form-negocio">
         <label>Nombre del Negocio:</label>
-        <input type="text" id="nombre-negocio" required placeholder="Ej. Tacos El Paisa">
+        <input type="text" id="nombre-negocio" placeholder="Ej. Tacos El Paisa" required>
         
-        <label>Ubicación del Negocio (Latitud, Longitud):</label>
-        <div class="geo-input">
-          <input type="number" step="any" id="lat-negocio" placeholder="Latitud" required>
-          <input type="number" step="any" id="lng-negocio" placeholder="Longitud" required>
-          <button type="button" onclick="obtenerUbicacionNegocio()">Usar mi GPS</button>
+        <label>Dirección del Negocio:</label>
+        <div class="direccion-grid">
+          <input type="text" id="negocio-calle" placeholder="Calle" required>
+          <input type="text" id="negocio-numero" placeholder="Número Ext/Int" required>
+          <input type="text" id="negocio-colonia" placeholder="Colonia" required>
+          <input type="text" id="negocio-cp" placeholder="Código Postal" required>
+          <input type="text" id="negocio-municipio" placeholder="Municipio / Ciudad" required>
         </div>
+        <button type="button" class="btn-secundario" onclick="obtenerUbicacionNegocio()">Usar mi dirección actual</button>
 
         <h3>Agregar Producto al Menú</h3>
         <input type="text" id="prod-nombre" placeholder="Nombre del platillo">
@@ -29,21 +33,28 @@
       </form>
     </section>
 
+    <!-- VISTA DEL CLIENTE -->
     <section class="card">
       <h2 id="titulo-negocio">Menú del Restaurant</h2>
       <div id="lista-menu" class="menu-grid"></div>
 
       <h2>2. Datos de Envío del Cliente</h2>
       <form id="form-cliente">
-        <label>Tu Ubicación (Latitud, Longitud):</label>
-        <div class="geo-input">
-          <input type="number" step="any" id="lat-cliente" placeholder="Latitud" required>
-          <input type="number" step="any" id="lng-cliente" placeholder="Longitud" required>
-          <button type="button" onclick="obtenerUbicacionCliente()">Usar mi GPS</button>
+        <label>Dirección de Entrega:</label>
+        <div class="direccion-grid">
+          <input type="text" id="cliente-calle" placeholder="Calle" required>
+          <input type="text" id="cliente-numero" placeholder="Número Ext/Int" required>
+          <input type="text" id="cliente-colonia" placeholder="Colonia" required>
+          <input type="text" id="cliente-cp" placeholder="Código Postal" required>
+          <input type="text" id="cliente-municipio" placeholder="Municipio / Ciudad" required>
         </div>
-        <button type="button" onclick="calcularTotal()">Calcular Total y Envío</button>
+        <button type="button" class="btn-secundario" onclick="obtenerUbicacionCliente()">Usar mi dirección actual</button>
+        
+        <button type="button" class="btn-principal" onclick="calcularTotal()">Calcular Total y Envío</button>
       </form>
 
+      <!-- RESUMEN DE COMPRA -->
+      
       <div id="resumen" class="resumen-box" style="display:none;">
         <h3>Resumen del Pedido</h3>
         <p>Distancia: <strong id="distancia-km">0</strong> km</p>
@@ -51,6 +62,11 @@
         <p>Subtotal Productos: <strong>$<span id="subtotal">0</span> MXN</strong></p>
         <hr>
         <p class="total">Total a Pagar: <strong>$<span id="total-final">0</span> MXN</strong></p>
+
+        <!-- BOTÓN DE WHATSAPP -->
+        <button type="button" class="btn-whatsapp" onclick="enviarPedidoWhatsApp()">
+          📱 Enviar Pedido por WhatsApp
+        </button>
       </div>
     </section>
   </div>
