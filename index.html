@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema de Pedidos y Envíos</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="container">
+    <section class="card">
+      <h2>1. Configuración del Negocio</h2>
+      <form id="form-negocio">
+        <label>Nombre del Negocio:</label>
+        <input type="text" id="nombre-negocio" required placeholder="Ej. Tacos El Paisa">
+        
+        <label>Ubicación del Negocio (Latitud, Longitud):</label>
+        <div class="geo-input">
+          <input type="number" step="any" id="lat-negocio" placeholder="Latitud" required>
+          <input type="number" step="any" id="lng-negocio" placeholder="Longitud" required>
+          <button type="button" onclick="obtenerUbicacionNegocio()">Usar mi GPS</button>
+        </div>
+
+        <h3>Agregar Producto al Menú</h3>
+        <input type="text" id="prod-nombre" placeholder="Nombre del platillo">
+        <input type="number" id="prod-precio" placeholder="Precio ($MXN)" step="0.5">
+        <button type="button" onclick="agregarProducto()">Agregar al Menú</button>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2 id="titulo-negocio">Menú del Restaurant</h2>
+      <div id="lista-menu" class="menu-grid"></div>
+
+      <h2>2. Datos de Envío del Cliente</h2>
+      <form id="form-cliente">
+        <label>Tu Ubicación (Latitud, Longitud):</label>
+        <div class="geo-input">
+          <input type="number" step="any" id="lat-cliente" placeholder="Latitud" required>
+          <input type="number" step="any" id="lng-cliente" placeholder="Longitud" required>
+          <button type="button" onclick="obtenerUbicacionCliente()">Usar mi GPS</button>
+        </div>
+        <button type="button" onclick="calcularTotal()">Calcular Total y Envío</button>
+      </form>
+
+      <div id="resumen" class="resumen-box" style="display:none;">
+        <h3>Resumen del Pedido</h3>
+        <p>Distancia: <strong id="distancia-km">0</strong> km</p>
+        <p>Costo de Envío ($20/km): <strong>$<span id="costo-envio">0</span> MXN</strong></p>
+        <p>Subtotal Productos: <strong>$<span id="subtotal">0</span> MXN</strong></p>
+        <hr>
+        <p class="total">Total a Pagar: <strong>$<span id="total-final">0</span> MXN</strong></p>
+      </div>
+    </section>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
